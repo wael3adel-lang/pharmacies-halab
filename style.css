@@ -1,22 +1,63 @@
-/* =========================================
-   الإعدادات العامة
-========================================= */
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --primary: #117a72;
+    --primary-dark: #0d625c;
+    --primary-light: #e8f5f3;
+
+    --text: #1f2933;
+    --muted: #6b7280;
+
+    --border: #e2e8e7;
+    --background: #f5f7f7;
+    --white: #ffffff;
+
+    --green: #16845a;
+    --green-light: #eaf7f0;
+
+    --blue: #2563eb;
+    --blue-light: #eff6ff;
+
+    --shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+
+    --radius: 14px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
     margin: 0;
-    background: #f5f7f7;
-    color: #1f2d32;
-    font-family: "Cairo", Arial, sans-serif;
+
+    font-family:
+        "Tajawal",
+        "Tahoma",
+        "Arial",
+        sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
     direction: rtl;
+
+    -webkit-font-smoothing: antialiased;
 }
+
 
 button,
 input {
@@ -24,698 +65,1174 @@ input {
 }
 
 
-/* =========================================
-   رأس الموقع
-========================================= */
+button {
+    cursor: pointer;
+}
+
+
+a {
+    color: inherit;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .site-header {
-    background: #117a72;
-    color: #ffffff;
-    padding: 20px 5%;
+    background: var(--white);
+
+    border-bottom: 1px solid var(--border);
+
+    position: relative;
+
+    z-index: 20;
+}
+
+
+.header-inner {
+    width: min(1050px, calc(100% - 30px));
+
+    margin: auto;
+
+    min-height: 105px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     gap: 25px;
 }
 
+
+/* =========================================================
+   BRAND
+========================================================= */
+
 .brand {
     display: flex;
+
     align-items: center;
-    gap: 14px;
+
+    gap: 13px;
+
+    min-width: 0;
 }
+
 
 .site-logo {
     width: 58px;
     height: 58px;
+
     object-fit: contain;
+
     border-radius: 12px;
-    background: #ffffff;
+
+    flex-shrink: 0;
 }
+
+
+.brand-text {
+    min-width: 0;
+}
+
 
 .brand-text h1 {
     margin: 0;
+
     font-size: 25px;
-    font-weight: 700;
+
+    font-weight: 800;
+
+    line-height: 1.35;
+
+    color: #172b2a;
 }
+
 
 .brand-text p {
-    margin: 3px 0 0;
+    margin: 4px 0 0;
+
+    color: var(--muted);
+
     font-size: 13px;
-    opacity: 0.9;
+
+    font-weight: 500;
 }
+
+
+/* =========================================================
+   LAST UPDATE
+========================================================= */
 
 .last-update {
-    font-size: 12px;
-    opacity: 0.95;
-}
+    background: var(--primary-light);
 
+    color: var(--primary);
 
-/* =========================================
-   البحث الرئيسي
-========================================= */
+    border: 1px solid #d5ebe8;
 
-.main-search {
-    background: #117a72;
-    padding: 0 5% 25px;
-}
+    border-radius: 10px;
 
-.search-box {
-    max-width: 1000px;
-    margin: auto;
+    padding: 9px 13px;
+
     display: flex;
-    gap: 8px;
-}
 
-.search-box input {
-    flex: 1;
-    min-width: 0;
-    height: 50px;
-    padding: 0 18px;
-    border: none;
-    border-radius: 10px;
-    outline: none;
-    background: #ffffff;
-    color: #1f2d32;
-    font-size: 15px;
-}
+    flex-direction: column;
 
-.search-box input::placeholder {
-    color: #879395;
-}
+    align-items: center;
 
-.search-box button {
-    width: 70px;
-    border: none;
-    border-radius: 10px;
-    background: #e8efee;
-    color: #405054;
-    cursor: pointer;
-    font-size: 13px;
-}
+    gap: 2px;
 
-.search-box button:hover {
-    background: #ffffff;
+    white-space: nowrap;
+
+    font-size: 11px;
+
+    font-weight: 500;
 }
 
 
-/* =========================================
-   المحتوى
-========================================= */
+.last-update strong {
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
 
 .container {
-    width: min(1100px, calc(100% - 30px));
-    margin: 30px auto 50px;
+    width: min(1050px, calc(100% - 30px));
+
+    margin: auto;
+
+    padding: 25px 0 45px;
 }
 
 
-/* =========================================
-   عنوان القسم
-========================================= */
+/* =========================================================
+   MAIN SEARCH
+========================================================= */
 
-.section-heading {
-    margin-bottom: 14px;
-}
-
-.section-heading h2 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-    color: #1f2d32;
-}
-
-.section-heading p {
-    margin: 4px 0 0;
-    color: #718087;
-    font-size: 13px;
-}
-
-
-/* =========================================
-   اختيار الحي
-========================================= */
-
-.neighborhood-section {
+.main-search {
     margin-bottom: 25px;
 }
 
+
+.search-box {
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    padding: 6px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-shadow: var(--shadow);
+}
+
+
+.search-box input {
+    flex: 1;
+
+    min-width: 0;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    padding: 12px 13px;
+
+    font-size: 14px;
+
+    color: var(--text);
+}
+
+
+.search-box input::placeholder {
+    color: #9aa4a8;
+}
+
+
+.search-box button {
+    border: 0;
+
+    background: #f1f5f4;
+
+    color: #596563;
+
+    border-radius: 9px;
+
+    padding: 9px 15px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: 0.15s;
+}
+
+
+.search-box button:hover {
+    background: #e5eceb;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.section-heading {
+    margin-bottom: 11px;
+}
+
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    color: #263635;
+}
+
+
+.section-heading p {
+    margin: 3px 0 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   NEIGHBORHOOD SECTION
+========================================================= */
+
+.neighborhood-section {
+    position: relative;
+
+    z-index: 15;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   NEIGHBORHOOD SELECTOR
+========================================================= */
+
 .neighborhood-selector {
     position: relative;
+
     width: 100%;
 }
 
 
-/* الشريط الأساسي */
+/* =========================================================
+   MAIN NEIGHBORHOOD BAR
+========================================================= */
 
 .neighborhood-header {
     width: 100%;
-    height: 58px;
-    padding: 0 20px;
+
+    min-height: 52px;
+
+    border: 1px solid var(--border);
+
+    background: var(--white);
+
+    border-radius: 12px;
+
+    padding: 0 15px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    background: #ffffff;
-    border: 1px solid #d9e2e0;
-    border-radius: 11px;
+    gap: 15px;
 
-    color: #26363b;
-    font-size: 16px;
-    font-weight: 600;
+    color: var(--text);
 
-    cursor: pointer;
-    transition: 0.2s;
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s,
+        border-radius 0.15s;
 }
+
 
 .neighborhood-header:hover {
-    border-color: #117a72;
+    border-color: #b9d6d2;
 }
 
-.neighborhood-selector.open .neighborhood-header {
-    border-color: #117a72;
+
+.neighborhood-header.open {
+    border-color: var(--primary);
+
     border-bottom-left-radius: 0;
+
     border-bottom-right-radius: 0;
+
+    box-shadow:
+        0 3px 15px rgba(15, 118, 110, 0.08);
 }
 
-.neighborhood-header .arrow {
-    color: #117a72;
-    font-size: 13px;
+
+.selected-neighborhood {
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+
+.neighborhood-arrow {
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 8px;
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 11px;
+
+    flex-shrink: 0;
+
     transition: transform 0.2s;
 }
 
-.neighborhood-selector.open .arrow {
+
+.neighborhood-header.open .neighborhood-arrow {
     transform: rotate(180deg);
 }
 
 
-/* =========================================
-   القائمة المنسدلة
-========================================= */
+/* =========================================================
+   DROPDOWN
+========================================================= */
 
 .neighborhood-dropdown {
-    display: none;
+    position: absolute;
 
-    width: 100%;
+    top: 100%;
 
-    background: #ffffff;
-    border: 1px solid #117a72;
-    border-top: none;
+    right: 0;
 
-    border-radius: 0 0 11px 11px;
+    left: 0;
+
+    background: var(--white);
+
+    border: 1px solid var(--primary);
+
+    border-top: 0;
+
+    border-radius:
+        0 0 12px 12px;
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.12);
 
     overflow: hidden;
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-
-    position: relative;
-    z-index: 20;
-}
-
-.neighborhood-selector.open .neighborhood-dropdown {
-    display: block;
+    z-index: 100;
 }
 
 
-/* =========================================
-   البحث داخل الأحياء
-========================================= */
+/* =========================================================
+   AREA SEARCH
+========================================================= */
 
 .neighborhood-search {
-    padding: 12px;
-    background: #ffffff;
-    border-bottom: 1px solid #edf1f0;
+    padding: 10px;
+
+    background: #fafcfc;
+
+    border-bottom: 1px solid var(--border);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 2;
 }
+
 
 .neighborhood-search input {
     width: 100%;
-    height: 44px;
 
-    padding: 0 15px;
+    height: 42px;
 
-    border: 1px solid #d8e0df;
-    border-radius: 8px;
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
 
     outline: none;
 
-    color: #26363b;
-    background: #f9fbfb;
+    background: var(--white);
 
-    font-size: 14px;
+    padding: 0 12px;
+
+    font-size: 13px;
+
+    color: var(--text);
+
+    transition: border-color 0.15s;
 }
+
 
 .neighborhood-search input:focus {
-    background: #ffffff;
-    border-color: #117a72;
+    border-color: var(--primary);
 }
 
 
-/* =========================================
-   قائمة الأحياء
-========================================= */
+.neighborhood-search input::placeholder {
+    color: #9aa4a8;
+}
+
+
+/* =========================================================
+   AREA LIST
+========================================================= */
 
 .neighborhood-list {
-    width: 100%;
-    max-height: 340px;
+    max-height: 330px;
 
     overflow-y: auto;
-    overflow-x: hidden;
+
+    padding: 5px;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #b9ccca
+        transparent;
 }
 
-
-/* =========================================
-   كل حي
-========================================= */
-
-.neighborhood-item {
-    display: block;
-
-    width: 100%;
-    min-height: 48px;
-
-    padding: 12px 18px;
-
-    background: #ffffff;
-
-    border: none;
-    border-bottom: 1px solid #edf1f0;
-
-    text-align: right;
-
-    color: #26363b;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s,
-        color 0.15s;
-}
-
-.neighborhood-item:last-child {
-    border-bottom: none;
-}
-
-.neighborhood-item:hover {
-    background: #f1f7f6;
-    color: #117a72;
-}
-
-.neighborhood-item.active {
-    background: #117a72;
-    color: #ffffff;
-}
-
-
-/* =========================================
-   شريط التمرير
-========================================= */
 
 .neighborhood-list::-webkit-scrollbar {
     width: 7px;
 }
 
+
 .neighborhood-list::-webkit-scrollbar-track {
-    background: #f4f7f7;
+    background: transparent;
 }
+
 
 .neighborhood-list::-webkit-scrollbar-thumb {
-    background: #bdccca;
-    border-radius: 10px;
-}
+    background: #c5d5d3;
 
-.neighborhood-list::-webkit-scrollbar-thumb:hover {
-    background: #117a72;
+    border-radius: 20px;
 }
 
 
-/* =========================================
-   الإحصائيات
-========================================= */
+/* =========================================================
+   AREA BUTTONS
+========================================================= */
+
+.area-button {
+    width: 100%;
+
+    border: 0;
+
+    border-bottom: 1px solid #edf1f1;
+
+    background: transparent;
+
+    color: #344240;
+
+    text-align: right;
+
+    padding: 11px 12px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    border-radius: 7px;
+
+    transition:
+        background 0.12s,
+        color 0.12s;
+}
+
+
+.area-button:last-child {
+    border-bottom: 0;
+}
+
+
+.area-button:hover {
+    background: #f3f8f7;
+
+    color: var(--primary);
+}
+
+
+.area-button.active {
+    background: var(--primary-light);
+
+    color: var(--primary);
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   DUTY SECTION
+========================================================= */
+
+.duty-section {
+    margin-bottom: 20px;
+}
+
+
+.duty-filters {
+    display: flex;
+
+    gap: 7px;
+
+    overflow-x: auto;
+
+    padding-bottom: 3px;
+
+    scrollbar-width: none;
+}
+
+
+.duty-filters::-webkit-scrollbar {
+    display: none;
+}
+
+
+.filter-button {
+    flex-shrink: 0;
+
+    border: 1px solid var(--border);
+
+    background: var(--white);
+
+    color: #4b5755;
+
+    border-radius: 9px;
+
+    padding: 9px 14px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: 0.15s;
+}
+
+
+.filter-button:hover {
+    border-color: #b7d3d0;
+}
+
+
+.filter-button.active {
+    background: var(--primary);
+
+    border-color: var(--primary);
+
+    color: var(--white);
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
 
 .statistics {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin: 20px 0 30px;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin-bottom: 25px;
 }
 
+
 .stat-card {
-    background: #ffffff;
-    border: 1px solid #e1e7e6;
-    border-radius: 11px;
-    padding: 16px 10px;
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    padding: 13px 10px;
+
     text-align: center;
+
+    box-shadow: var(--shadow);
 }
+
 
 .stat-card strong {
     display: block;
-    color: #117a72;
+
     font-size: 23px;
-    font-weight: 700;
+
     line-height: 1.2;
+
+    color: var(--primary);
+
+    font-weight: 800;
 }
+
 
 .stat-card span {
     display: block;
+
     margin-top: 4px;
-    color: #718087;
-    font-size: 11px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    font-weight: 600;
 }
 
 
-/* =========================================
-   رأس النتائج
-========================================= */
+/* =========================================================
+   RESULTS HEADER
+========================================================= */
 
 .results-header {
-    margin-bottom: 15px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
 }
+
 
 .results-header h2 {
     margin: 0;
-    font-size: 20px;
-    font-weight: 700;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    color: #263635;
 }
+
 
 .results-header p {
-    margin: 3px 0 0;
-    color: #7b888c;
-    font-size: 12px;
+    margin: 4px 0 0;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 500;
 }
 
 
-/* =========================================
-   شبكة الصيدليات
-========================================= */
+/* =========================================================
+   PHARMACY GRID
+========================================================= */
 
 .pharmacy-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
 }
 
 
-/* =========================================
-   بطاقات الصيدليات
-========================================= */
+/* =========================================================
+   PHARMACY CARD
+========================================================= */
 
 .pharmacy-card {
-    background: #ffffff;
-    border: 1px solid #e0e7e6;
-    border-radius: 12px;
-    padding: 16px;
+    background: var(--white);
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    padding: 15px;
+
+    box-shadow: var(--shadow);
 
     transition:
         transform 0.15s,
-        box-shadow 0.15s;
+        box-shadow 0.15s,
+        border-color 0.15s;
 }
+
 
 .pharmacy-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+
+    border-color: #c7ddda;
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.08);
 }
 
 
-/* اسم الصيدلية */
+/* =========================================================
+   PHARMACY TOP
+========================================================= */
+
+.pharmacy-top {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
 
 .pharmacy-name {
     margin: 0;
 
-    color: #1f2d32;
+    font-size: 16px;
 
-    font-size: 17px;
-    font-weight: 700;
+    font-weight: 800;
+
+    line-height: 1.45;
+
+    color: #263635;
 }
 
 
-/* الحي */
+.area-name {
+    margin-top: 3px;
 
-.pharmacy-area {
-    margin-top: 4px;
-
-    color: #117a72;
-
-    font-size: 12px;
-    font-weight: 600;
-}
-
-
-/* العنوان */
-
-.pharmacy-address {
-    margin-top: 10px;
-
-    color: #66757a;
-
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-
-/* معلومات المناوبة */
-
-.pharmacy-duty {
-    margin-top: 12px;
-
-    background: #f1f8f7;
-
-    border-radius: 8px;
-
-    padding: 9px 10px;
-
-    color: #116d66;
+    color: var(--primary);
 
     font-size: 11px;
+
     font-weight: 600;
 }
 
 
-/* أزرار البطاقة */
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    padding: 5px 8px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+.status-24 {
+    background: var(--green-light);
+
+    color: var(--green);
+}
+
+
+.status-0130 {
+    background: var(--blue-light);
+
+    color: var(--blue);
+}
+
+
+/* =========================================================
+   ADDRESS
+========================================================= */
+
+.pharmacy-address {
+    margin-top: 12px;
+
+    padding-top: 10px;
+
+    border-top: 1px solid #edf1f1;
+
+    color: #5e6968;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    min-height: 38px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
 
 .pharmacy-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        1fr 1fr;
 
     gap: 7px;
 
     margin-top: 12px;
 }
 
-.pharmacy-actions a {
+
+.action-button {
+    min-height: 36px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-
-    min-height: 38px;
-
-    border-radius: 8px;
 
     text-decoration: none;
 
+    border-radius: 8px;
+
     font-size: 11px;
-    font-weight: 600;
-}
 
-.map-button {
-    background: #eaf7f5;
-    color: #117a72;
-    border: 1px solid #c8e3df;
-}
+    font-weight: 700;
 
-.call-button {
-    background: #f5f7f7;
-    color: #3d4b4f;
-    border: 1px solid #dce3e2;
-}
-
-.map-button:hover,
-.call-button:hover {
-    opacity: 0.8;
+    transition: 0.15s;
 }
 
 
-/* =========================================
-   لا توجد نتائج
-========================================= */
+.location-button {
+    background: var(--primary-light);
+
+    border: 1px solid #cde7e3;
+
+    color: var(--primary);
+}
+
+
+.location-button:hover {
+    background: #dcefeb;
+}
+
+
+.phone-button {
+    background: #f2f6f5;
+
+    border: 1px solid var(--border);
+
+    color: #475452;
+}
+
+
+.phone-button:hover {
+    background: #e8eeed;
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
 
 .no-results {
-    background: #ffffff;
+    background: var(--white);
 
-    border: 1px solid #e1e7e6;
-    border-radius: 12px;
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
 
     padding: 45px 20px;
 
     text-align: center;
+
+    box-shadow: var(--shadow);
 }
+
 
 .no-results h3 {
     margin: 0;
 
-    font-size: 18px;
+    font-size: 17px;
+
+    font-weight: 800;
+
+    color: #374442;
 }
+
 
 .no-results p {
-    margin: 8px 0 0;
+    margin: 7px 0 0;
 
-    color: #7a878b;
+    color: var(--muted);
 
-    font-size: 13px;
+    font-size: 12px;
 }
 
 
-/* =========================================
-   التذييل
-========================================= */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .site-footer {
-    margin-top: 50px;
+    border-top: 1px solid var(--border);
 
-    padding: 25px 15px;
-
-    background: #ffffff;
-
-    border-top: 1px solid #e1e7e6;
+    background: var(--white);
 
     text-align: center;
 
-    color: #718087;
+    padding: 25px 15px;
+
+    color: var(--muted);
 
     font-size: 11px;
 
-    line-height: 2;
-}
-
-.site-footer .copyright {
-    margin-top: 5px;
-
-    color: #117a72;
-
-    font-size: 12px;
-    font-weight: 700;
+    line-height: 1.8;
 }
 
 
-/* =========================================
-   الهاتف
-========================================= */
+.footer-title {
+    color: #344240;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.footer-text {
+    margin-top: 2px;
+}
+
+
+.footer-update {
+    margin-top: 2px;
+
+    color: #899391;
+}
+
+
+.copyright {
+    margin-top: 8px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    direction: ltr;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 700px) {
 
-    .site-header {
-        padding: 16px 12px;
-        align-items: flex-start;
+    .header-inner {
+        width: calc(100% - 20px);
+
+        min-height: 88px;
+
+        gap: 12px;
     }
 
-    .brand {
-        gap: 10px;
-    }
 
     .site-logo {
         width: 48px;
+
         height: 48px;
     }
 
-    .brand-text h1 {
-        font-size: 18px;
+
+    .brand {
+        gap: 9px;
     }
+
+
+    .brand-text h1 {
+        font-size: 19px;
+    }
+
 
     .brand-text p {
         font-size: 10px;
     }
 
+
     .last-update {
-        display: none;
-    }
+        padding: 7px 8px;
 
-    .main-search {
-        padding: 0 12px 18px;
-    }
-
-    .search-box input {
-        height: 46px;
-        font-size: 13px;
-    }
-
-    .search-box button {
-        width: 60px;
-    }
-
-    .container {
-        width: calc(100% - 20px);
-        margin-top: 20px;
-    }
-
-    .section-heading h2 {
-        font-size: 19px;
-    }
-
-    .section-heading p {
-        font-size: 11px;
-    }
-
-    .neighborhood-header {
-        height: 54px;
-        padding: 0 15px;
-        font-size: 14px;
-    }
-
-    .neighborhood-list {
-        max-height: 300px;
-    }
-
-    .neighborhood-item {
-        min-height: 46px;
-        padding: 12px 15px;
-        font-size: 13px;
-    }
-
-    .statistics {
-        gap: 6px;
-    }
-
-    .stat-card {
-        padding: 12px 5px;
-    }
-
-    .stat-card strong {
-        font-size: 19px;
-    }
-
-    .stat-card span {
         font-size: 9px;
     }
 
+
+    .last-update strong {
+        font-size: 10px;
+    }
+
+
+    .container {
+        width: calc(100% - 20px);
+
+        padding-top: 18px;
+    }
+
+
     .pharmacy-grid {
         grid-template-columns: 1fr;
+
         gap: 8px;
     }
+
 
     .pharmacy-card {
         padding: 13px;
     }
 
+
+    .pharmacy-name {
+        font-size: 15px;
+    }
+
+
+    .statistics {
+        gap: 6px;
+    }
+
+
+    .stat-card {
+        padding: 11px 5px;
+    }
+
+
+    .stat-card strong {
+        font-size: 20px;
+    }
+
+
+    .stat-card span {
+        font-size: 9px;
+    }
+
+
+    .neighborhood-list {
+        max-height: 300px;
+    }
+
 }
 
 
-/* =========================================
-   شاشات صغيرة جداً
-========================================= */
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-@media (max-width: 380px) {
-
-    .brand-text h1 {
-        font-size: 16px;
-    }
+@media (max-width: 420px) {
 
     .brand-text p {
         display: none;
     }
 
-    .statistics {
-        grid-template-columns: 1fr;
+
+    .brand-text h1 {
+        font-size: 17px;
     }
 
+
+    .site-logo {
+        width: 44px;
+
+        height: 44px;
+    }
+
+
+    .last-update {
+        font-size: 8px;
+    }
+
+
+    .last-update strong {
+        font-size: 9px;
+    }
+
+
+    .search-box input {
+        font-size: 12px;
+
+        padding-right: 9px;
+    }
+
+
+    .search-box button {
+        padding: 8px 10px;
+
+        font-size: 10px;
+    }
+
+
+    .neighborhood-header {
+        min-height: 48px;
+
+        font-size: 13px;
+    }
+
+
+    .pharmacy-actions {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--primary);
+
+    outline-offset: 2px;
 }
