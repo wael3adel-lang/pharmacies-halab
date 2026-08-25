@@ -24,7 +24,7 @@
     <link rel="manifest"
           href="manifest.json">
 
-    <!-- الخط -->
+    <!-- الخط الرسمي -->
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
 
@@ -32,8 +32,9 @@
           href="https://fonts.gstatic.com"
           crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet"
@@ -43,40 +44,53 @@
 
 <body>
 
-    <!-- =========================
-         رأس الموقع
-    ========================== -->
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
 
     <header class="site-header">
 
-        <div class="brand">
+        <div class="header-inner">
 
-            <img
-                src="assets/logo.png"
-                alt="صيدليات حلب المناوبة"
-                class="site-logo">
 
-            <div class="brand-text">
+            <!-- الشعار واسم الموقع -->
 
-                <h1>
-                    صيدليات حلب المناوبة
-                </h1>
+            <div class="brand">
 
-                <p>
-                    اعثر على الصيدلية المناوبة الأقرب إليك
-                </p>
+                <img
+                    src="assets/logo.png"
+                    alt="صيدليات حلب المناوبة"
+                    class="site-logo">
+
+                <div class="brand-text">
+
+                    <h1>
+                        صيدليات حلب المناوبة
+                    </h1>
+
+                    <p>
+                        دليل الصيدليات المناوبة في حلب
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
 
+            <!-- آخر تحديث -->
 
-        <div class="last-update">
+            <div class="last-update">
 
-            آخر تحديث:
-            <strong id="lastUpdate">
-                اليوم
-            </strong>
+                <span>
+                    آخر تحديث
+                </span>
+
+                <strong id="lastUpdate">
+                    اليوم
+                </strong>
+
+            </div>
 
         </div>
 
@@ -84,88 +98,111 @@
 
 
 
-    <!-- =========================
-         البحث الرئيسي
-    ========================== -->
-
-    <section class="main-search">
-
-        <div class="search-box">
-
-            <input
-                type="text"
-                id="pharmacySearch"
-                placeholder="ابحث باسم الصيدلية أو الحي أو العنوان..."
-                autocomplete="off">
-
-            <button
-                id="clearSearch"
-                type="button">
-                مسح
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         المحتوى الرئيسي
-    ========================== -->
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
     <main class="container">
 
 
-        <!-- =========================
-             اختيار الحي
-        ========================== -->
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <section class="main-search">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="pharmacySearch"
+                    placeholder="ابحث باسم الصيدلية أو الحي أو العنوان..."
+                    autocomplete="off">
+
+                <button
+                    id="clearSearch"
+                    type="button">
+
+                    مسح
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NEIGHBORHOODS
+        ================================================== -->
 
         <section class="neighborhood-section">
+
 
             <div class="section-heading">
 
                 <h2>
-                    أحياء حلب
+                    البحث حسب الحي
                 </h2>
 
                 <p>
-                    اختر الحي لعرض الصيدليات المناوبة فيه
+                    اختر حيّاً لعرض الصيدليات المناوبة فيه
                 </p>
 
             </div>
 
 
-            <!-- شريط اختيار الحي -->
+
+            <!-- =================================================
+                 SELECTOR
+            ================================================== -->
 
             <div
                 class="neighborhood-selector"
                 id="neighborhoodSelector">
 
 
-                <!-- الشريط -->
+                <!-- =============================================
+                     الشريط الرئيسي
+                ============================================== -->
 
                 <button
                     class="neighborhood-header"
                     id="neighborhoodToggle"
-                    type="button">
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="neighborhoodDropdown">
 
-                    <span id="selectedNeighborhood">
-                        اختر الحي
+                    <span
+                        class="selected-neighborhood"
+                        id="selectedNeighborhood">
+
+                        جميع الأحياء
+
                     </span>
 
-                    <span class="arrow">
+
+                    <span
+                        class="neighborhood-arrow"
+                        id="neighborhoodArrow">
+
                         ▼
+
                     </span>
 
                 </button>
 
 
-                <!-- القائمة المنسدلة -->
+
+                <!-- =============================================
+                     القائمة المنسدلة
+                ============================================== -->
 
                 <div
                     class="neighborhood-dropdown"
-                    id="neighborhoodDropdown">
+                    id="neighborhoodDropdown"
+                    hidden>
 
 
                     <!-- البحث داخل الأحياء -->
@@ -173,26 +210,30 @@
                     <div class="neighborhood-search">
 
                         <input
-                            type="text"
+                            type="search"
                             id="neighborhoodSearch"
-                            placeholder="ابحث عن حي..."
+                            placeholder="ابحث عن اسم الحي..."
                             autocomplete="off">
 
                     </div>
 
 
-                    <!-- قائمة الأحياء -->
+
+                    <!-- =========================================
+                         قائمة الأحياء
+                    ========================================== -->
 
                     <div
                         class="neighborhood-list"
                         id="neighborhoodList">
 
                         <!--
-                            الأحياء سيتم إدراجها
-                            بواسطة app.js
+                            سيتم إنشاء الأحياء
+                            بواسطة JavaScript
                         -->
 
                     </div>
+
 
                 </div>
 
@@ -202,11 +243,67 @@
 
 
 
-        <!-- =========================
-             الإحصائيات
-        ========================== -->
+        <!-- =================================================
+             DUTY FILTERS
+        ================================================== -->
+
+        <section class="duty-section">
+
+
+            <div class="section-heading">
+
+                <h2>
+                    نوع المناوبة
+                </h2>
+
+            </div>
+
+
+            <div class="duty-filters">
+
+
+                <button
+                    type="button"
+                    class="filter-button active"
+                    data-duty="all">
+
+                    جميع المناوبات
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-duty="24">
+
+                    24 ساعة
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-button"
+                    data-duty="0130">
+
+                    حتى 1:30 ليلاً
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATISTICS
+        ================================================== -->
 
         <section class="statistics">
+
 
             <div class="stat-card">
 
@@ -215,10 +312,11 @@
                 </strong>
 
                 <span>
-                    الصيدليات
+                    إجمالي الصيدليات
                 </span>
 
             </div>
+
 
 
             <div class="stat-card">
@@ -228,10 +326,11 @@
                 </strong>
 
                 <span>
-                    مناوبة حتى 1:30 ليلاً
+                    حتى 1:30 ليلاً
                 </span>
 
             </div>
+
 
 
             <div class="stat-card">
@@ -246,38 +345,45 @@
 
             </div>
 
+
         </section>
 
 
 
-        <!-- =========================
-             عنوان النتائج
-        ========================== -->
+        <!-- =================================================
+             RESULTS HEADER
+        ================================================== -->
 
         <section class="results-header">
 
-            <h2>
-                جميع الصيدليات المناوبة
-            </h2>
 
-            <p id="resultsCount">
-                الصيدليات المناوبة حالياً
-            </p>
+            <div>
+
+                <h2>
+                    الصيدليات المناوبة
+                </h2>
+
+                <p id="resultsCount">
+                    الصيدليات المناوبة حالياً
+                </p>
+
+            </div>
+
 
         </section>
 
 
 
-        <!-- =========================
-             نتائج الصيدليات
-        ========================== -->
+        <!-- =================================================
+             PHARMACIES
+        ================================================== -->
 
         <section
             class="pharmacy-grid"
             id="pharmacyList">
 
             <!--
-                الصيدليات سيتم عرضها
+                ستظهر الصيدليات هنا
                 بواسطة app.js
             -->
 
@@ -285,9 +391,9 @@
 
 
 
-        <!-- =========================
-             لا توجد نتائج
-        ========================== -->
+        <!-- =================================================
+             NO RESULTS
+        ================================================== -->
 
         <section
             class="no-results"
@@ -299,40 +405,50 @@
             </h3>
 
             <p>
-                جرّب البحث باسم آخر أو اختر حيّاً مختلفاً.
+                لم نجد صيدليات مطابقة للبحث الحالي.
             </p>
 
         </section>
+
 
     </main>
 
 
 
-    <!-- =========================
-         تذييل الموقع
-    ========================== -->
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
 
     <footer class="site-footer">
 
-        <div>
-            دليل الصيدليات المناوبة في حلب
+
+        <div class="footer-title">
+            صيدليات حلب المناوبة
         </div>
 
-        <div>
+
+        <div class="footer-text">
+            دليل الصيدليات المناوبة في محافظة حلب
+        </div>
+
+
+        <div class="footer-update">
             يتم تحديث البيانات بشكل دوري
         </div>
+
 
         <div class="copyright">
             by: AMMAR MORGAN
         </div>
 
+
     </footer>
 
 
 
-    <!-- =========================
-         JavaScript
-    ========================== -->
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
 
     <script src="data.js"></script>
 
