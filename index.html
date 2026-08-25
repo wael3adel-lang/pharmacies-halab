@@ -1,1172 +1,265 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <title>صيدليات حلب المناوبة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="description"
-    content="دليل الصيدليات المناوبة في حلب مع العناوين وأوقات المناوبة."
-  >
+    <title>صيدليات حلب المناوبة</title>
 
-  <style>
+    <meta
+        name="description"
+        content="دليل الصيدليات المناوبة في مدينة حلب"
+    >
 
-    * {
-      box-sizing: border-box;
-    }
+    <!-- الخط العربي -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    body {
-      margin: 0;
-      font-family:
-        system-ui,
-        -apple-system,
-        "Segoe UI",
-        Tahoma,
-        Arial,
-        sans-serif;
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-      background: #f4f7f7;
-      color: #17202a;
-    }
-
-    .wrap {
-      width: min(950px, calc(100% - 20px));
-      margin: auto;
-    }
-
-    /* =========================
-       الهيدر
-    ========================= */
-
-    header {
-      background: #0f766e;
-      color: white;
-      padding: 18px 0 20px;
-    }
-
-    .brand {
-      font-size: 25px;
-      font-weight: 900;
-    }
-
-    .subtitle {
-      margin-top: 5px;
-      font-size: 13px;
-      opacity: .9;
-    }
-
-    .updated {
-      margin-top: 8px;
-      font-size: 10px;
-      opacity: .8;
-    }
-
-    /* =========================
-       البحث
-    ========================= */
-
-    .search-box {
-      margin-top: 14px;
-    }
-
-    .search-box input {
-      width: 100%;
-      border: 0;
-      outline: none;
-      border-radius: 13px;
-
-      padding: 13px 15px;
-
-      font-family: inherit;
-      font-size: 14px;
-
-      background: white;
-    }
-
-    /* =========================
-       اختيار المنطقة
-    ========================= */
-
-    .regions {
-      display: flex;
-      gap: 7px;
-
-      overflow-x: auto;
-
-      padding: 12px 0;
-
-      scrollbar-width: none;
-    }
-
-    .regions::-webkit-scrollbar {
-      display: none;
-    }
-
-    .region-button {
-      border: 1px solid #d6dddd;
-      background: white;
-
-      color: #17202a;
-
-      border-radius: 999px;
-
-      padding: 9px 15px;
-
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 800;
-
-      white-space: nowrap;
-
-      cursor: pointer;
-    }
-
-    .region-button.active {
-      background: #0f766e;
-      color: white;
-      border-color: #0f766e;
-    }
-
-    /* =========================
-       الفلاتر
-    ========================= */
-
-    .filters {
-      display: flex;
-      gap: 6px;
-
-      overflow-x: auto;
-
-      padding-bottom: 10px;
-
-      scrollbar-width: none;
-    }
-
-    .filters::-webkit-scrollbar {
-      display: none;
-    }
-
-    .filter-button {
-      border: 1px solid #d6dddd;
-      background: white;
-
-      border-radius: 999px;
-
-      padding: 8px 13px;
-
-      font-family: inherit;
-      font-size: 11px;
-      font-weight: 800;
-
-      white-space: nowrap;
-
-      cursor: pointer;
-    }
-
-    .filter-button.active {
-      background: #0f766e;
-      color: white;
-      border-color: #0f766e;
-    }
-
-    /* =========================
-       الإحصائيات
-    ========================= */
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 7px;
-
-      margin: 5px 0 10px;
-    }
-
-    .stat {
-      background: white;
-
-      border: 1px solid #e1e7e7;
-
-      border-radius: 12px;
-
-      padding: 9px 5px;
-
-      text-align: center;
-    }
-
-    .stat strong {
-      display: block;
-
-      color: #0f766e;
-
-      font-size: 19px;
-      line-height: 1.2;
-    }
-
-    .stat span {
-      display: block;
-
-      margin-top: 3px;
-
-      color: #64748b;
-
-      font-size: 9px;
-    }
-
-    /* =========================
-       العداد
-    ========================= */
-
-    .count {
-      margin: 4px 2px 8px;
-
-      color: #64748b;
-
-      font-size: 11px;
-    }
-
-    /* =========================
-       شبكة الصيدليات
-    ========================= */
-
-    .pharmacies {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-      gap: 8px;
-
-      padding-bottom: 25px;
-    }
-
-    /* =========================
-       بطاقة الصيدلية
-    ========================= */
-
-    .card {
-      background: white;
-
-      border: 2px solid #dce5e4;
-
-      border-radius: 14px;
-
-      overflow: hidden;
-
-      box-shadow:
-        0 2px 7px rgba(0,0,0,.04);
-    }
-
-    .card-main {
-      padding: 11px;
-    }
-
-    .card-head {
-      display: flex;
-
-      align-items: flex-start;
-
-      gap: 7px;
-    }
-
-    .status {
-      width: 9px;
-      height: 9px;
-
-      min-width: 9px;
-
-      margin-top: 6px;
-
-      border-radius: 50%;
-
-      background: #22c55e;
-    }
-
-    .pharmacy-name {
-      flex: 1;
-
-      font-size: 15px;
-
-      font-weight: 900;
-
-      line-height: 1.35;
-    }
-
-    .area {
-      margin-top: 3px;
-
-      padding-right: 16px;
-
-      color: #68757a;
-
-      font-size: 9px;
-
-      white-space: nowrap;
-
-      overflow: hidden;
-
-      text-overflow: ellipsis;
-    }
-
-    .duty {
-      margin-top: 9px;
-
-      background: #ecfdf5;
-
-      color: #047857;
-
-      border-radius: 9px;
-
-      padding: 8px;
-
-      text-align: center;
-
-      font-size: 11px;
-
-      font-weight: 900;
-    }
-
-    .address {
-      margin-top: 8px;
-
-      background: #f8fafc;
-
-      border-radius: 8px;
-
-      padding: 8px;
-
-      color: #475569;
-
-      font-size: 10px;
-
-      line-height: 1.6;
-    }
-
-    .actions {
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 5px;
-
-      margin-top: 8px;
-    }
-
-    .button {
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      min-height: 34px;
-
-      border-radius: 8px;
-
-      text-decoration: none;
-
-      font-family: inherit;
-
-      font-size: 10px;
-
-      font-weight: 800;
-    }
-
-    .map-button {
-      background: #ecfdf5;
-
-      color: #047857;
-
-      border: 1px solid #a7f3d0;
-    }
-
-    .call-button {
-      background: #eff6ff;
-
-      color: #1d4ed8;
-
-      border: 1px solid #bfdbfe;
-    }
-
-    /* =========================
-       لا توجد نتائج
-    ========================= */
-
-    .empty {
-      grid-column: 1 / -1;
-
-      background: white;
-
-      border: 1px solid #e1e7e7;
-
-      border-radius: 14px;
-
-      padding: 30px 15px;
-
-      text-align: center;
-
-      color: #64748b;
-
-      font-size: 13px;
-    }
-
-    /* =========================
-       الفوتر
-    ========================= */
-
-    footer {
-      padding: 20px 0 30px;
-
-      text-align: center;
-
-      color: #94a3b8;
-
-      font-size: 10px;
-    }
-
-    /* =========================
-       الهاتف
-    ========================= */
-
-    @media (max-width: 600px) {
-
-      .wrap {
-        width: calc(100% - 16px);
-      }
-
-      header {
-        padding: 15px 0 17px;
-      }
-
-      .brand {
-        font-size: 22px;
-      }
-
-      .subtitle {
-        font-size: 12px;
-      }
-
-      .pharmacies {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-
-        gap: 7px;
-      }
-
-      .card-main {
-        padding: 9px;
-      }
-
-      .pharmacy-name {
-        font-size: 13px;
-      }
-
-      .duty {
-        font-size: 9px;
-        padding: 7px 4px;
-      }
-
-      .address {
-        font-size: 9px;
-      }
-
-    }
-
-    @media (max-width: 360px) {
-
-      .pharmacies {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-  </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-<header>
+    <!-- ================= HEADER ================= -->
 
-  <div class="wrap">
+    <header class="site-header">
 
-    <div class="brand">
-      💊 صيدليات حلب المناوبة
-    </div>
+        <div class="header-content">
 
-    <div class="subtitle">
-      اعرف الصيدلية المناوبة الأقرب إليك
-    </div>
+            <div class="brand">
 
-    <div class="updated">
-      آخر تحديث: اليوم
-    </div>
-
-    <div class="search-box">
-
-      <input
-        id="search"
-        type="search"
-        placeholder="🔎 ابحث عن صيدلية أو حي أو عنوان..."
-        autocomplete="off"
-      >
-
-    </div>
-
-  </div>
-
-</header>
-
-
-<main class="wrap">
-
-  <!-- المناطق -->
-
-  <div class="regions">
-
-    <button
-      class="region-button active"
-      data-region="all">
-      حلب
-    </button>
-
-    <button
-      class="region-button"
-      data-region="الجميلية">
-      الجميلية
-    </button>
-
-    <button
-      class="region-button"
-      data-region="الشعار">
-      الشعار
-    </button>
-
-    <button
-      class="region-button"
-      data-region="الميدان">
-      الميدان
-    </button>
-
-    <button
-      class="region-button"
-      data-region="السكري">
-      السكري
-    </button>
-
-    <button
-      class="region-button"
-      data-region="الفرقان">
-      الفرقان
-    </button>
-
-  </div>
-
-
-  <!-- الفلاتر -->
-
-  <div class="filters">
-
-    <button
-      class="filter-button active"
-      data-filter="all">
-      الكل
-    </button>
-
-    <button
-      class="filter-button"
-      data-filter="night">
-      🌙 حتى 1:30 ليلاً
-    </button>
-
-    <button
-      class="filter-button"
-      data-filter="24">
-      🕐 24 ساعة
-    </button>
-
-  </div>
-
-
-  <!-- الإحصائيات -->
-
-  <div class="stats">
-
-    <div class="stat">
-      <strong id="totalCount">0</strong>
-      <span>الصيدليات</span>
-    </div>
-
-    <div class="stat">
-      <strong id="nightCount">0</strong>
-      <span>مناوبة حتى 1:30</span>
-    </div>
-
-    <div class="stat">
-      <strong id="fullDayCount">0</strong>
-      <span>24 ساعة</span>
-    </div>
-
-  </div>
-
-
-  <div
-    class="count"
-    id="count">
-    جاري التحميل...
-  </div>
-
-
-  <!-- الصيدليات -->
-
-  <section
-    class="pharmacies"
-    id="pharmacies">
-
-  </section>
-
-</main>
-
-
-<footer>
-
-  دليل الصيدليات المناوبة في حلب
-  <br>
-  يتم تحديث البيانات بشكل دوري
-
-</footer>
-
-
-<script>
-
-  /*
-   * ============================
-   * البيانات التجريبية
-   * ============================
-   *
-   * لاحقاً سنستبدل هذه البيانات
-   * ببيانات Google Sheets / Supabase
-   */
-
-  const pharmacies = [
-
-    {
-      name: "الصيدلية المركزية",
-      area: "الميريديان",
-      address: "أمام الباب الخلفي لفندق الشيراتون",
-      duty: "24 ساعة",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "محمد رزوق",
-      area: "الشعار",
-      address: "جانب كازية الشرق",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "عصام",
-      area: "الشعار",
-      address: "جانب جامع نور الشهداء",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "عبد الرحمن",
-      area: "الشعار",
-      address: "بعد مشفى الشفاء أمام جامع عبد الرحمن",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "شعار المركزية",
-      area: "الشعار",
-      address: "عند جسر الشعار",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "الحكيم",
-      area: "الشعار",
-      address: "دوار الشعار - أول طريق الباب",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "البلسم",
-      area: "الشعار",
-      address: "الشعار - طريق الباب",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "الشام",
-      area: "الشعار",
-      address: "الشعار - العواصم القديمة",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "بيان",
-      area: "الشعار",
-      address: "الشعار - دوار الحلوانية",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "حمامة",
-      area: "الشعار",
-      address: "دوار باب الحديد",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "سوريا الجديدة",
-      area: "الشعار",
-      address: "باب الجديد",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "كفور كشكيشان",
-      area: "الميدان",
-      address: "خلف جامع شرقي شارع مخبر النور",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "العافية",
-      area: "الميدان",
-      address: "نزلة سليمان الحلبي شارع بوطة الكرس",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "الحطيب",
-      area: "الهلك",
-      address: "هلك تحتاني جانب المثلت",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "الدواء",
-      area: "الجبانة",
-      address: "الجبانة",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "بيان مصري",
-      area: "الجبيرية",
-      address: "شارع الفوال رضا",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "الريم",
-      area: "سليمان الحلبي",
-      address: "سليمان الحلبي - أمام جامع القرآن",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "اطموسيان",
-      area: "السليمانية",
-      address: "السليمانية - عوجة حب",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "سامر",
-      area: "السليمانية",
-      address: "السليمانية - أمام مركز MTN",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    },
-
-    {
-      name: "الحكيم الحديثة",
-      area: "الشيخ طه",
-      address: "الشيخ طه - جانب جامع",
-      duty: "حتى 1:30 ليلاً",
-      phone: "",
-      location: ""
-    }
-
-  ];
-
-
-  /*
-   * ============================
-   * المتغيرات
-   * ============================
-   */
-
-  let selectedRegion = "all";
-
-  let selectedFilter = "all";
-
-
-  /*
-   * ============================
-   * رسم الصيدليات
-   * ============================
-   */
-
-  function render() {
-
-    const search =
-      document
-        .getElementById("search")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const filtered =
-      pharmacies.filter(function(pharmacy) {
-
-        /*
-         * البحث
-         */
-
-        const text =
-          (
-            pharmacy.name +
-            " " +
-            pharmacy.area +
-            " " +
-            pharmacy.address
-          ).toLowerCase();
-
-
-        if (
-          search &&
-          !text.includes(search)
-        ) {
-          return false;
-        }
-
-
-        /*
-         * المنطقة
-         */
-
-        if (
-          selectedRegion !== "all" &&
-          pharmacy.area !== selectedRegion
-        ) {
-          return false;
-        }
-
-
-        /*
-         * نوع المناوبة
-         */
-
-        if (
-          selectedFilter === "night" &&
-          pharmacy.duty !== "حتى 1:30 ليلاً"
-        ) {
-          return false;
-        }
-
-
-        if (
-          selectedFilter === "24" &&
-          pharmacy.duty !== "24 ساعة"
-        ) {
-          return false;
-        }
-
-
-        return true;
-
-      });
-
-
-    /*
-     * الإحصائيات
-     */
-
-    document.getElementById("totalCount").textContent =
-      pharmacies.length;
-
-
-    document.getElementById("nightCount").textContent =
-      pharmacies.filter(function(p) {
-
-        return p.duty === "حتى 1:30 ليلاً";
-
-      }).length;
-
-
-    document.getElementById("fullDayCount").textContent =
-      pharmacies.filter(function(p) {
-
-        return p.duty === "24 ساعة";
-
-      }).length;
-
-
-    document.getElementById("count").textContent =
-      "عرض " +
-      filtered.length +
-      " صيدلية";
-
-
-    /*
-     * لا توجد نتائج
-     */
-
-    if (!filtered.length) {
-
-      document.getElementById("pharmacies").innerHTML = `
-
-        <div class="empty">
-
-          🔎 لا توجد صيدليات مطابقة للبحث.
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    /*
-     * البطاقات
-     */
-
-    document.getElementById("pharmacies").innerHTML =
-      filtered.map(function(pharmacy) {
-
-        const mapButton =
-          pharmacy.location
-          ? `
-            <a
-              class="button map-button"
-              href="${pharmacy.location}"
-              target="_blank"
-              rel="noopener">
-              📍 الموقع
-            </a>
-          `
-          : `
-            <span class="button map-button">
-              📍 الموقع قريباً
-            </span>
-          `;
-
-
-        const phoneButton =
-          pharmacy.phone
-          ? `
-            <a
-              class="button call-button"
-              href="tel:${pharmacy.phone}">
-              📞 اتصال
-            </a>
-          `
-          : `
-            <span class="button call-button">
-              📞 الرقم قريباً
-            </span>
-          `;
-
-
-        return `
-
-          <article class="card">
-
-            <div class="card-main">
-
-              <div class="card-head">
-
-                <span class="status"></span>
-
-                <div class="pharmacy-name">
-                  ${pharmacy.name}
+                <div class="brand-title">
+                    صيدليات حلب المناوبة
                 </div>
 
-              </div>
-
-
-              <div class="area">
-                📍 ${pharmacy.area}
-              </div>
-
-
-              <div class="duty">
-                🌙 ${pharmacy.duty}
-              </div>
-
-
-              <div class="address">
-                📌 ${pharmacy.address}
-              </div>
-
-
-              <div class="actions">
-
-                ${mapButton}
-
-                ${phoneButton}
-
-              </div>
+                <div class="brand-subtitle">
+                    اعثر على الصيدلية المناوبة الأقرب إليك
+                </div>
 
             </div>
 
-          </article>
+            <div class="last-update">
+                آخر تحديث:
+                <span id="lastUpdate">اليوم</span>
+            </div>
 
-        `;
+        </div>
 
-      }).join("");
-
-  }
-
-
-  /*
-   * ============================
-   * البحث
-   * ============================
-   */
-
-  document
-    .getElementById("search")
-    .addEventListener(
-      "input",
-      render
-    );
+    </header>
 
 
-  /*
-   * ============================
-   * المناطق
-   * ============================
-   */
+    <!-- ================= MAIN ================= -->
 
-  document
-    .querySelectorAll("[data-region]")
-    .forEach(function(button) {
+    <main class="container">
 
-      button.addEventListener(
-        "click",
-        function() {
+        <!-- البحث -->
 
-          document
-            .querySelectorAll("[data-region]")
-            .forEach(function(btn) {
+        <section class="search-section">
 
-              btn.classList.remove("active");
+            <div class="search-box">
 
-            });
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="ابحث عن اسم الصيدلية أو الحي أو العنوان..."
+                    autocomplete="off"
+                >
 
+                <button id="clearSearch" class="clear-search">
+                    ×
+                </button>
 
-          button.classList.add("active");
+            </div>
 
-
-          selectedRegion =
-            button.dataset.region;
+        </section>
 
 
-          render();
+        <!-- ================= FILTERS ================= -->
 
-        }
-      );
+        <section class="filters">
 
-    });
+            <button
+                class="filter-button active"
+                data-area="الكل"
+            >
+                الكل
+            </button>
+
+            <button
+                class="filter-button"
+                data-area="الجميلية"
+            >
+                الجميلية
+            </button>
+
+            <button
+                class="filter-button"
+                data-area="الشعار"
+            >
+                الشعار
+            </button>
+
+            <button
+                class="filter-button"
+                data-area="الميدان"
+            >
+                الميدان
+            </button>
+
+            <button
+                class="filter-button"
+                data-area="السكري"
+            >
+                السكري
+            </button>
+
+            <button
+                class="filter-button"
+                data-area="الفرقان"
+            >
+                الفرقان
+            </button>
+
+            <button
+                class="filter-button"
+                data-area="سيف الدولة"
+            >
+                سيف الدولة
+            </button>
+
+            <button
+                class="filter-button"
+                data-area="الحمدانية"
+            >
+                الحمدانية
+            </button>
+
+        </section>
 
 
-  /*
-   * ============================
-   * الفلاتر
-   * ============================
-   */
+        <!-- ================= CONTENT ================= -->
 
-  document
-    .querySelectorAll("[data-filter]")
-    .forEach(function(button) {
-
-      button.addEventListener(
-        "click",
-        function() {
-
-          document
-            .querySelectorAll("[data-filter]")
-            .forEach(function(btn) {
-
-              btn.classList.remove("active");
-
-            });
+        <section class="content-layout">
 
 
-          button.classList.add("active");
+            <!-- قائمة الأحياء -->
+
+            <aside class="areas-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h2>أحياء حلب</h2>
+
+                        <span id="areasCount">
+                            جميع الأحياء
+                        </span>
+                    </div>
+
+                </div>
 
 
-          selectedFilter =
-            button.dataset.filter;
+                <div class="area-search">
+
+                    <input
+                        type="text"
+                        id="areaSearch"
+                        placeholder="ابحث عن حي..."
+                    >
+
+                </div>
 
 
-          render();
+                <div
+                    id="areasList"
+                    class="areas-list"
+                >
+                </div>
 
-        }
-      );
-
-    });
+            </aside>
 
 
-  /*
-   * ============================
-   * التشغيل
-   * ============================
-   */
+            <!-- الصيدليات -->
 
-  render();
+            <section class="pharmacies-section">
 
-</script>
+                <div class="section-top">
+
+                    <div>
+
+                        <h1 id="selectedArea">
+                            جميع الصيدليات المناوبة
+                        </h1>
+
+                        <p id="resultsText">
+                            الصيدليات المناوبة حالياً
+                        </p>
+
+                    </div>
+
+                    <div class="results-number">
+                        <strong id="pharmacyCount">0</strong>
+                        <span>صيدلية</span>
+                    </div>
+
+                </div>
+
+
+                <!-- البطاقات -->
+
+                <div
+                    id="pharmaciesList"
+                    class="pharmacies-grid"
+                >
+                </div>
+
+
+                <!-- لا توجد نتائج -->
+
+                <div
+                    id="noResults"
+                    class="no-results hidden"
+                >
+
+                    <h3>
+                        لا توجد نتائج
+                    </h3>
+
+                    <p>
+                        جرّب البحث باسم آخر أو اختر حياً مختلفاً.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="site-footer">
+
+        <div>
+            دليل الصيدليات المناوبة في حلب
+        </div>
+
+        <div>
+            يتم تحديث البيانات بشكل دوري
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
 
 </body>
-
 </html>
