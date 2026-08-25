@@ -1,5 +1,5 @@
 /* =========================================
-   GENERAL
+   الإعدادات العامة
 ========================================= */
 
 * {
@@ -12,10 +12,10 @@ html {
 
 body {
     margin: 0;
-    background: #f5f7f8;
-    color: #17212b;
-    font-family: "Noto Sans Arabic", Arial, sans-serif;
-    line-height: 1.7;
+    background: #f5f7f7;
+    color: #1f2d32;
+    font-family: "Cairo", Arial, sans-serif;
+    direction: rtl;
 }
 
 button,
@@ -23,477 +23,699 @@ input {
     font-family: inherit;
 }
 
-button {
-    cursor: pointer;
-}
-
-.container {
-    width: min(1180px, calc(100% - 32px));
-    margin: auto;
-}
-
 
 /* =========================================
-   HEADER
+   رأس الموقع
 ========================================= */
 
 .site-header {
-    background: #ffffff;
-    border-bottom: 1px solid #e2e7ea;
-}
-
-.header-content {
-    min-height: 145px;
+    background: #117a72;
+    color: #ffffff;
+    padding: 20px 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 30px;
+    gap: 25px;
 }
 
-.brand-title {
-    font-size: 32px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.site-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 25px;
     font-weight: 700;
-    color: #116b64;
 }
 
-.brand-subtitle {
-    margin-top: 4px;
-    color: #66727d;
-    font-size: 16px;
+.brand-text p {
+    margin: 3px 0 0;
+    font-size: 13px;
+    opacity: 0.9;
 }
 
 .last-update {
-    color: #68747e;
-    font-size: 14px;
-}
-
-.last-update strong {
-    color: #116b64;
+    font-size: 12px;
+    opacity: 0.95;
 }
 
 
 /* =========================================
-   SEARCH
+   البحث الرئيسي
 ========================================= */
-
-.search-section {
-    background: #116b64;
-    padding: 24px 0;
-}
 
 .main-search {
+    background: #117a72;
+    padding: 0 5% 25px;
+}
+
+.search-box {
+    max-width: 1000px;
+    margin: auto;
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
-.main-search input {
-    width: 100%;
-    height: 58px;
-    border: 0;
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 0 18px;
+    border: none;
     border-radius: 10px;
-    padding: 0 20px;
-    font-size: 16px;
     outline: none;
     background: #ffffff;
-}
-
-.main-search button {
-    width: 90px;
-    border: 0;
-    border-radius: 10px;
-    background: #e9eeee;
-    color: #17312f;
-    font-weight: 600;
-}
-
-.main-search button:hover {
-    background: #ffffff;
-}
-
-
-/* =========================================
-   MAIN
-========================================= */
-
-.main-content {
-    padding-top: 35px;
-    padding-bottom: 60px;
-}
-
-
-/* =========================================
-   AREAS
-========================================= */
-
-.areas-section {
-    background: #ffffff;
-    border: 1px solid #e1e6e8;
-    border-radius: 14px;
-    padding: 25px;
-    margin-bottom: 30px;
-}
-
-.section-header h1 {
-    margin: 0;
-    font-size: 25px;
-}
-
-.section-header p {
-    margin: 4px 0 20px;
-    color: #727d86;
-}
-
-.area-search {
-    margin-bottom: 20px;
-}
-
-.area-search input {
-    width: 100%;
-    height: 48px;
-    border: 1px solid #d7dee2;
-    border-radius: 8px;
-    padding: 0 15px;
-    outline: none;
+    color: #1f2d32;
     font-size: 15px;
 }
 
-.area-search input:focus {
-    border-color: #116b64;
+.search-box input::placeholder {
+    color: #879395;
 }
 
-
-/* =========================================
-   AREA LIST
-========================================= */
-
-.areas-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 9px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding-left: 5px;
+.search-box button {
+    width: 70px;
+    border: none;
+    border-radius: 10px;
+    background: #e8efee;
+    color: #405054;
+    cursor: pointer;
+    font-size: 13px;
 }
 
-.area-button {
-    background: #f7f9fa;
-    border: 1px solid #e0e5e8;
-    color: #26343d;
-    min-height: 44px;
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 14px;
-    text-align: right;
-    transition: 0.2s;
-}
-
-.area-button:hover {
-    border-color: #116b64;
-    color: #116b64;
-    background: #f0f8f7;
-}
-
-.area-button.active {
-    background: #116b64;
-    border-color: #116b64;
-    color: #ffffff;
-}
-
-
-/* =========================================
-   RESULTS HEADER
-========================================= */
-
-.results-section {
-    margin-top: 30px;
-}
-
-.results-header {
+.search-box button:hover {
     background: #ffffff;
-    border: 1px solid #e1e6e8;
-    border-radius: 14px 14px 0 0;
-    padding: 22px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
-.results-header h2 {
+
+/* =========================================
+   المحتوى
+========================================= */
+
+.container {
+    width: min(1100px, calc(100% - 30px));
+    margin: 30px auto 50px;
+}
+
+
+/* =========================================
+   عنوان القسم
+========================================= */
+
+.section-heading {
+    margin-bottom: 14px;
+}
+
+.section-heading h2 {
     margin: 0;
-    font-size: 24px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2d32;
 }
 
-.results-header p {
-    margin: 3px 0 0;
-    color: #727d86;
-}
-
-.results-count {
-    text-align: center;
-    min-width: 100px;
-}
-
-.results-count strong {
-    display: block;
-    color: #116b64;
-    font-size: 28px;
-    line-height: 1;
-}
-
-.results-count span {
-    color: #727d86;
+.section-heading p {
+    margin: 4px 0 0;
+    color: #718087;
     font-size: 13px;
 }
 
 
 /* =========================================
-   FILTERS
+   اختيار الحي
 ========================================= */
 
-.filters {
-    background: #ffffff;
-    border-left: 1px solid #e1e6e8;
-    border-right: 1px solid #e1e6e8;
-    padding: 0 25px 20px;
+.neighborhood-section {
+    margin-bottom: 25px;
+}
+
+.neighborhood-selector {
+    position: relative;
+    width: 100%;
+}
+
+
+/* الشريط الأساسي */
+
+.neighborhood-header {
+    width: 100%;
+    height: 58px;
+    padding: 0 20px;
+
     display: flex;
-    gap: 8px;
-}
+    align-items: center;
+    justify-content: space-between;
 
-.filter-button {
-    border: 1px solid #d9e0e3;
     background: #ffffff;
-    color: #44515a;
-    border-radius: 7px;
-    padding: 8px 17px;
-    font-size: 14px;
+    border: 1px solid #d9e2e0;
+    border-radius: 11px;
+
+    color: #26363b;
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.filter-button:hover {
-    border-color: #116b64;
+.neighborhood-header:hover {
+    border-color: #117a72;
 }
 
-.filter-button.active {
-    background: #116b64;
-    color: #ffffff;
-    border-color: #116b64;
+.neighborhood-selector.open .neighborhood-header {
+    border-color: #117a72;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.neighborhood-header .arrow {
+    color: #117a72;
+    font-size: 13px;
+    transition: transform 0.2s;
+}
+
+.neighborhood-selector.open .arrow {
+    transform: rotate(180deg);
 }
 
 
 /* =========================================
-   PHARMACIES
+   القائمة المنسدلة
 ========================================= */
 
-.pharmacies-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    padding-top: 15px;
-}
+.neighborhood-dropdown {
+    display: none;
 
-.pharmacy-card {
+    width: 100%;
+
     background: #ffffff;
-    border: 1px solid #dfe5e8;
-    border-radius: 12px;
-    padding: 20px;
-    transition: 0.2s;
+    border: 1px solid #117a72;
+    border-top: none;
+
+    border-radius: 0 0 11px 11px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+    position: relative;
+    z-index: 20;
 }
 
-.pharmacy-card:hover {
-    border-color: #b8cbc9;
-    box-shadow: 0 5px 20px rgba(20, 50, 50, 0.07);
+.neighborhood-selector.open .neighborhood-dropdown {
+    display: block;
 }
 
-.pharmacy-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+
+/* =========================================
+   البحث داخل الأحياء
+========================================= */
+
+.neighborhood-search {
+    padding: 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #edf1f0;
+}
+
+.neighborhood-search input {
+    width: 100%;
+    height: 44px;
+
+    padding: 0 15px;
+
+    border: 1px solid #d8e0df;
+    border-radius: 8px;
+
+    outline: none;
+
+    color: #26363b;
+    background: #f9fbfb;
+
+    font-size: 14px;
+}
+
+.neighborhood-search input:focus {
+    background: #ffffff;
+    border-color: #117a72;
+}
+
+
+/* =========================================
+   قائمة الأحياء
+========================================= */
+
+.neighborhood-list {
+    width: 100%;
+    max-height: 340px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   كل حي
+========================================= */
+
+.neighborhood-item {
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+
+    padding: 12px 18px;
+
+    background: #ffffff;
+
+    border: none;
+    border-bottom: 1px solid #edf1f0;
+
+    text-align: right;
+
+    color: #26363b;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s,
+        color 0.15s;
+}
+
+.neighborhood-item:last-child {
+    border-bottom: none;
+}
+
+.neighborhood-item:hover {
+    background: #f1f7f6;
+    color: #117a72;
+}
+
+.neighborhood-item.active {
+    background: #117a72;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   شريط التمرير
+========================================= */
+
+.neighborhood-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.neighborhood-list::-webkit-scrollbar-track {
+    background: #f4f7f7;
+}
+
+.neighborhood-list::-webkit-scrollbar-thumb {
+    background: #bdccca;
+    border-radius: 10px;
+}
+
+.neighborhood-list::-webkit-scrollbar-thumb:hover {
+    background: #117a72;
+}
+
+
+/* =========================================
+   الإحصائيات
+========================================= */
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    margin: 20px 0 30px;
 }
 
-.pharmacy-name {
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e1e7e6;
+    border-radius: 11px;
+    padding: 16px 10px;
+    text-align: center;
+}
+
+.stat-card strong {
+    display: block;
+    color: #117a72;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stat-card span {
+    display: block;
+    margin-top: 4px;
+    color: #718087;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   رأس النتائج
+========================================= */
+
+.results-header {
+    margin-bottom: 15px;
+}
+
+.results-header h2 {
     margin: 0;
     font-size: 20px;
     font-weight: 700;
 }
 
-.area-name {
-    color: #116b64;
-    font-size: 13px;
-    margin-top: 2px;
-}
-
-.status {
+.results-header p {
+    margin: 3px 0 0;
+    color: #7b888c;
     font-size: 12px;
-    font-weight: 600;
-    padding: 5px 9px;
-    border-radius: 6px;
-    white-space: nowrap;
-}
-
-.status-24 {
-    background: #e7f6f2;
-    color: #087263;
-}
-
-.status-0130 {
-    background: #f2f4f5;
-    color: #4e5960;
-}
-
-.pharmacy-address {
-    margin-top: 16px;
-    padding: 12px;
-    background: #f7f9fa;
-    border-radius: 8px;
-    color: #4d5961;
-    font-size: 14px;
-}
-
-.pharmacy-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 15px;
-}
-
-.action-button {
-    flex: 1;
-    text-decoration: none;
-    text-align: center;
-    padding: 9px;
-    border-radius: 7px;
-    font-size: 14px;
-    border: 1px solid #d8e0e2;
-}
-
-.location-button {
-    color: #116b64;
-    background: #f2faf8;
-}
-
-.phone-button {
-    color: #34434c;
-    background: #ffffff;
-}
-
-.action-button:hover {
-    border-color: #116b64;
 }
 
 
 /* =========================================
-   EMPTY
+   شبكة الصيدليات
 ========================================= */
 
-.empty-state {
-    background: #ffffff;
-    border: 1px solid #e1e6e8;
-    border-radius: 10px;
-    padding: 50px 20px;
-    text-align: center;
-    margin-top: 15px;
-}
-
-.empty-state h3 {
-    margin: 0;
-}
-
-.empty-state p {
-    color: #77828a;
+.pharmacy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
 }
 
 
 /* =========================================
-   FOOTER
+   بطاقات الصيدليات
+========================================= */
+
+.pharmacy-card {
+    background: #ffffff;
+    border: 1px solid #e0e7e6;
+    border-radius: 12px;
+    padding: 16px;
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.pharmacy-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* اسم الصيدلية */
+
+.pharmacy-name {
+    margin: 0;
+
+    color: #1f2d32;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* الحي */
+
+.pharmacy-area {
+    margin-top: 4px;
+
+    color: #117a72;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* العنوان */
+
+.pharmacy-address {
+    margin-top: 10px;
+
+    color: #66757a;
+
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+
+/* معلومات المناوبة */
+
+.pharmacy-duty {
+    margin-top: 12px;
+
+    background: #f1f8f7;
+
+    border-radius: 8px;
+
+    padding: 9px 10px;
+
+    color: #116d66;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* أزرار البطاقة */
+
+.pharmacy-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    margin-top: 12px;
+}
+
+.pharmacy-actions a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 38px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.map-button {
+    background: #eaf7f5;
+    color: #117a72;
+    border: 1px solid #c8e3df;
+}
+
+.call-button {
+    background: #f5f7f7;
+    color: #3d4b4f;
+    border: 1px solid #dce3e2;
+}
+
+.map-button:hover,
+.call-button:hover {
+    opacity: 0.8;
+}
+
+
+/* =========================================
+   لا توجد نتائج
+========================================= */
+
+.no-results {
+    background: #ffffff;
+
+    border: 1px solid #e1e7e6;
+    border-radius: 12px;
+
+    padding: 45px 20px;
+
+    text-align: center;
+}
+
+.no-results h3 {
+    margin: 0;
+
+    font-size: 18px;
+}
+
+.no-results p {
+    margin: 8px 0 0;
+
+    color: #7a878b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   التذييل
 ========================================= */
 
 .site-footer {
+    margin-top: 50px;
+
+    padding: 25px 15px;
+
     background: #ffffff;
-    border-top: 1px solid #e1e6e8;
-    padding: 30px 0;
-    color: #66727a;
-    font-size: 14px;
+
+    border-top: 1px solid #e1e7e6;
+
+    text-align: center;
+
+    color: #718087;
+
+    font-size: 11px;
+
+    line-height: 2;
 }
 
-.site-footer p {
-    margin: 3px 0 0;
+.site-footer .copyright {
+    margin-top: 5px;
+
+    color: #117a72;
+
+    font-size: 12px;
+    font-weight: 700;
 }
 
 
 /* =========================================
-   MOBILE
+   الهاتف
 ========================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
 
-    .container {
-        width: min(100% - 20px, 1180px);
+    .site-header {
+        padding: 16px 12px;
+        align-items: flex-start;
     }
 
-    .header-content {
-        min-height: 120px;
-        display: block;
-        padding: 20px 0;
+    .brand {
+        gap: 10px;
     }
 
-    .brand-title {
-        font-size: 25px;
+    .site-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .brand-text h1 {
+        font-size: 18px;
+    }
+
+    .brand-text p {
+        font-size: 10px;
     }
 
     .last-update {
-        margin-top: 5px;
+        display: none;
     }
 
-    .areas-list {
-        grid-template-columns: repeat(2, 1fr);
-        max-height: 350px;
+    .main-search {
+        padding: 0 12px 18px;
     }
 
-    .pharmacies-grid {
+    .search-box input {
+        height: 46px;
+        font-size: 13px;
+    }
+
+    .search-box button {
+        width: 60px;
+    }
+
+    .container {
+        width: calc(100% - 20px);
+        margin-top: 20px;
+    }
+
+    .section-heading h2 {
+        font-size: 19px;
+    }
+
+    .section-heading p {
+        font-size: 11px;
+    }
+
+    .neighborhood-header {
+        height: 54px;
+        padding: 0 15px;
+        font-size: 14px;
+    }
+
+    .neighborhood-list {
+        max-height: 300px;
+    }
+
+    .neighborhood-item {
+        min-height: 46px;
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+
+    .statistics {
+        gap: 6px;
+    }
+
+    .stat-card {
+        padding: 12px 5px;
+    }
+
+    .stat-card strong {
+        font-size: 19px;
+    }
+
+    .stat-card span {
+        font-size: 9px;
+    }
+
+    .pharmacy-grid {
         grid-template-columns: 1fr;
+        gap: 8px;
     }
 
-    .results-header {
-        padding: 18px;
-    }
-
-    .results-header h2 {
-        font-size: 20px;
-    }
-
-    .filters {
-        padding: 0 18px 18px;
-        overflow-x: auto;
-    }
-
-    .filter-button {
-        white-space: nowrap;
+    .pharmacy-card {
+        padding: 13px;
     }
 
 }
 
 
-@media (max-width: 500px) {
+/* =========================================
+   شاشات صغيرة جداً
+========================================= */
 
-    .main-search {
-        display: block;
+@media (max-width: 380px) {
+
+    .brand-text h1 {
+        font-size: 16px;
     }
 
-    .main-search button {
-        width: 100%;
-        height: 42px;
-        margin-top: 8px;
+    .brand-text p {
+        display: none;
     }
 
-    .areas-section {
-        padding: 18px;
-    }
-
-    .areas-list {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .pharmacy-actions {
-        flex-direction: column;
+    .statistics {
+        grid-template-columns: 1fr;
     }
 
 }
