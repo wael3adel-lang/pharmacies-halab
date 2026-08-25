@@ -1,0 +1,499 @@
+/* =========================================
+   GENERAL
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #f5f7f8;
+    color: #17212b;
+    font-family: "Noto Sans Arabic", Arial, sans-serif;
+    line-height: 1.7;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.container {
+    width: min(1180px, calc(100% - 32px));
+    margin: auto;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.site-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e2e7ea;
+}
+
+.header-content {
+    min-height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.brand-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #116b64;
+}
+
+.brand-subtitle {
+    margin-top: 4px;
+    color: #66727d;
+    font-size: 16px;
+}
+
+.last-update {
+    color: #68747e;
+    font-size: 14px;
+}
+
+.last-update strong {
+    color: #116b64;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.search-section {
+    background: #116b64;
+    padding: 24px 0;
+}
+
+.main-search {
+    display: flex;
+    gap: 10px;
+}
+
+.main-search input {
+    width: 100%;
+    height: 58px;
+    border: 0;
+    border-radius: 10px;
+    padding: 0 20px;
+    font-size: 16px;
+    outline: none;
+    background: #ffffff;
+}
+
+.main-search button {
+    width: 90px;
+    border: 0;
+    border-radius: 10px;
+    background: #e9eeee;
+    color: #17312f;
+    font-weight: 600;
+}
+
+.main-search button:hover {
+    background: #ffffff;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main-content {
+    padding-top: 35px;
+    padding-bottom: 60px;
+}
+
+
+/* =========================================
+   AREAS
+========================================= */
+
+.areas-section {
+    background: #ffffff;
+    border: 1px solid #e1e6e8;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.section-header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.section-header p {
+    margin: 4px 0 20px;
+    color: #727d86;
+}
+
+.area-search {
+    margin-bottom: 20px;
+}
+
+.area-search input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #d7dee2;
+    border-radius: 8px;
+    padding: 0 15px;
+    outline: none;
+    font-size: 15px;
+}
+
+.area-search input:focus {
+    border-color: #116b64;
+}
+
+
+/* =========================================
+   AREA LIST
+========================================= */
+
+.areas-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-left: 5px;
+}
+
+.area-button {
+    background: #f7f9fa;
+    border: 1px solid #e0e5e8;
+    color: #26343d;
+    min-height: 44px;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    text-align: right;
+    transition: 0.2s;
+}
+
+.area-button:hover {
+    border-color: #116b64;
+    color: #116b64;
+    background: #f0f8f7;
+}
+
+.area-button.active {
+    background: #116b64;
+    border-color: #116b64;
+    color: #ffffff;
+}
+
+
+/* =========================================
+   RESULTS HEADER
+========================================= */
+
+.results-section {
+    margin-top: 30px;
+}
+
+.results-header {
+    background: #ffffff;
+    border: 1px solid #e1e6e8;
+    border-radius: 14px 14px 0 0;
+    padding: 22px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.results-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.results-header p {
+    margin: 3px 0 0;
+    color: #727d86;
+}
+
+.results-count {
+    text-align: center;
+    min-width: 100px;
+}
+
+.results-count strong {
+    display: block;
+    color: #116b64;
+    font-size: 28px;
+    line-height: 1;
+}
+
+.results-count span {
+    color: #727d86;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   FILTERS
+========================================= */
+
+.filters {
+    background: #ffffff;
+    border-left: 1px solid #e1e6e8;
+    border-right: 1px solid #e1e6e8;
+    padding: 0 25px 20px;
+    display: flex;
+    gap: 8px;
+}
+
+.filter-button {
+    border: 1px solid #d9e0e3;
+    background: #ffffff;
+    color: #44515a;
+    border-radius: 7px;
+    padding: 8px 17px;
+    font-size: 14px;
+}
+
+.filter-button:hover {
+    border-color: #116b64;
+}
+
+.filter-button.active {
+    background: #116b64;
+    color: #ffffff;
+    border-color: #116b64;
+}
+
+
+/* =========================================
+   PHARMACIES
+========================================= */
+
+.pharmacies-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding-top: 15px;
+}
+
+.pharmacy-card {
+    background: #ffffff;
+    border: 1px solid #dfe5e8;
+    border-radius: 12px;
+    padding: 20px;
+    transition: 0.2s;
+}
+
+.pharmacy-card:hover {
+    border-color: #b8cbc9;
+    box-shadow: 0 5px 20px rgba(20, 50, 50, 0.07);
+}
+
+.pharmacy-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.pharmacy-name {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.area-name {
+    color: #116b64;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.status-24 {
+    background: #e7f6f2;
+    color: #087263;
+}
+
+.status-0130 {
+    background: #f2f4f5;
+    color: #4e5960;
+}
+
+.pharmacy-address {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f7f9fa;
+    border-radius: 8px;
+    color: #4d5961;
+    font-size: 14px;
+}
+
+.pharmacy-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.action-button {
+    flex: 1;
+    text-decoration: none;
+    text-align: center;
+    padding: 9px;
+    border-radius: 7px;
+    font-size: 14px;
+    border: 1px solid #d8e0e2;
+}
+
+.location-button {
+    color: #116b64;
+    background: #f2faf8;
+}
+
+.phone-button {
+    color: #34434c;
+    background: #ffffff;
+}
+
+.action-button:hover {
+    border-color: #116b64;
+}
+
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.empty-state {
+    background: #ffffff;
+    border: 1px solid #e1e6e8;
+    border-radius: 10px;
+    padding: 50px 20px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.empty-state h3 {
+    margin: 0;
+}
+
+.empty-state p {
+    color: #77828a;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.site-footer {
+    background: #ffffff;
+    border-top: 1px solid #e1e6e8;
+    padding: 30px 0;
+    color: #66727a;
+    font-size: 14px;
+}
+
+.site-footer p {
+    margin: 3px 0 0;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .container {
+        width: min(100% - 20px, 1180px);
+    }
+
+    .header-content {
+        min-height: 120px;
+        display: block;
+        padding: 20px 0;
+    }
+
+    .brand-title {
+        font-size: 25px;
+    }
+
+    .last-update {
+        margin-top: 5px;
+    }
+
+    .areas-list {
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 350px;
+    }
+
+    .pharmacies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .results-header {
+        padding: 18px;
+    }
+
+    .results-header h2 {
+        font-size: 20px;
+    }
+
+    .filters {
+        padding: 0 18px 18px;
+        overflow-x: auto;
+    }
+
+    .filter-button {
+        white-space: nowrap;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .main-search {
+        display: block;
+    }
+
+    .main-search button {
+        width: 100%;
+        height: 42px;
+        margin-top: 8px;
+    }
+
+    .areas-section {
+        padding: 18px;
+    }
+
+    .areas-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pharmacy-actions {
+        flex-direction: column;
+    }
+
+}
