@@ -2,14 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>صيدليات حلب المناوبة</title>
 
     <meta
         name="description"
-        content="دليل الصيدليات المناوبة في مدينة حلب"
+        content="دليل الصيدليات المناوبة في حلب"
     >
 
     <!-- الخط العربي -->
@@ -17,20 +16,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
+    <!-- ملف التصميم -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header class="site-header">
 
-        <div class="header-content">
+        <div class="container header-content">
 
             <div class="brand">
 
@@ -46,7 +48,7 @@
 
             <div class="last-update">
                 آخر تحديث:
-                <span id="lastUpdate">اليوم</span>
+                <strong id="lastUpdate">اليوم</strong>
             </div>
 
         </div>
@@ -54,212 +56,207 @@
     </header>
 
 
-    <!-- ================= MAIN ================= -->
+    <!-- =========================
+         SEARCH
+    ========================== -->
 
-    <main class="container">
+    <section class="search-section">
 
-        <!-- البحث -->
+        <div class="container">
 
-        <section class="search-section">
-
-            <div class="search-box">
+            <div class="main-search">
 
                 <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="ابحث عن اسم الصيدلية أو الحي أو العنوان..."
-                    autocomplete="off"
+                    type="search"
+                    id="pharmacySearch"
+                    placeholder="ابحث باسم الصيدلية أو الحي أو العنوان..."
                 >
 
-                <button id="clearSearch" class="clear-search">
-                    ×
+                <button id="clearSearch" type="button">
+                    مسح
                 </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="container main-content">
+
+
+        <!-- =========================
+             AREAS
+        ========================== -->
+
+        <section class="areas-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h1>أحياء حلب</h1>
+
+                    <p>
+                        اختر الحي لعرض الصيدليات المناوبة فيه
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="area-search">
+
+                <input
+                    type="search"
+                    id="areaSearch"
+                    placeholder="ابحث عن حي..."
+                >
+
+            </div>
+
+
+            <div
+                class="areas-list"
+                id="areasList"
+            >
+
+                <!-- سيتم إنشاء الأحياء بواسطة JavaScript -->
 
             </div>
 
         </section>
 
 
-        <!-- ================= FILTERS ================= -->
+        <!-- =========================
+             RESULTS
+        ========================== -->
 
-        <section class="filters">
-
-            <button
-                class="filter-button active"
-                data-area="الكل"
-            >
-                الكل
-            </button>
-
-            <button
-                class="filter-button"
-                data-area="الجميلية"
-            >
-                الجميلية
-            </button>
-
-            <button
-                class="filter-button"
-                data-area="الشعار"
-            >
-                الشعار
-            </button>
-
-            <button
-                class="filter-button"
-                data-area="الميدان"
-            >
-                الميدان
-            </button>
-
-            <button
-                class="filter-button"
-                data-area="السكري"
-            >
-                السكري
-            </button>
-
-            <button
-                class="filter-button"
-                data-area="الفرقان"
-            >
-                الفرقان
-            </button>
-
-            <button
-                class="filter-button"
-                data-area="سيف الدولة"
-            >
-                سيف الدولة
-            </button>
-
-            <button
-                class="filter-button"
-                data-area="الحمدانية"
-            >
-                الحمدانية
-            </button>
-
-        </section>
+        <section class="results-section">
 
 
-        <!-- ================= CONTENT ================= -->
+            <div class="results-header">
 
-        <section class="content-layout">
+                <div>
 
+                    <h2>
+                        الصيدليات المناوبة
+                    </h2>
 
-            <!-- قائمة الأحياء -->
-
-            <aside class="areas-panel">
-
-                <div class="panel-header">
-
-                    <div>
-                        <h2>أحياء حلب</h2>
-
-                        <span id="areasCount">
-                            جميع الأحياء
-                        </span>
-                    </div>
-
-                </div>
-
-
-                <div class="area-search">
-
-                    <input
-                        type="text"
-                        id="areaSearch"
-                        placeholder="ابحث عن حي..."
-                    >
-
-                </div>
-
-
-                <div
-                    id="areasList"
-                    class="areas-list"
-                >
-                </div>
-
-            </aside>
-
-
-            <!-- الصيدليات -->
-
-            <section class="pharmacies-section">
-
-                <div class="section-top">
-
-                    <div>
-
-                        <h1 id="selectedArea">
-                            جميع الصيدليات المناوبة
-                        </h1>
-
-                        <p id="resultsText">
-                            الصيدليات المناوبة حالياً
-                        </p>
-
-                    </div>
-
-                    <div class="results-number">
-                        <strong id="pharmacyCount">0</strong>
-                        <span>صيدلية</span>
-                    </div>
-
-                </div>
-
-
-                <!-- البطاقات -->
-
-                <div
-                    id="pharmaciesList"
-                    class="pharmacies-grid"
-                >
-                </div>
-
-
-                <!-- لا توجد نتائج -->
-
-                <div
-                    id="noResults"
-                    class="no-results hidden"
-                >
-
-                    <h3>
-                        لا توجد نتائج
-                    </h3>
-
-                    <p>
-                        جرّب البحث باسم آخر أو اختر حياً مختلفاً.
+                    <p id="resultsDescription">
+                        الصيدليات المناوبة حالياً
                     </p>
 
                 </div>
 
-            </section>
+
+                <div class="results-count">
+
+                    <strong id="pharmacyCount">
+                        0
+                    </strong>
+
+                    <span>
+                        صيدلية
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+                <button
+                    class="filter-button active"
+                    data-duty="all"
+                >
+                    الكل
+                </button>
+
+                <button
+                    class="filter-button"
+                    data-duty="until0130"
+                >
+                    حتى 1:30 ليلاً
+                </button>
+
+                <button
+                    class="filter-button"
+                    data-duty="24"
+                >
+                    24 ساعة
+                </button>
+
+            </div>
+
+
+            <!-- PHARMACIES -->
+
+            <div
+                class="pharmacies-grid"
+                id="pharmaciesGrid"
+            >
+
+                <!-- الصيدليات ستظهر هنا -->
+
+            </div>
+
+
+            <!-- EMPTY -->
+
+            <div
+                class="empty-state"
+                id="emptyState"
+                hidden
+            >
+
+                <h3>
+                    لا توجد نتائج
+                </h3>
+
+                <p>
+                    جرّب البحث باسم آخر أو اختر حياً مختلفاً.
+                </p>
+
+            </div>
+
 
         </section>
 
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer class="site-footer">
 
-        <div>
-            دليل الصيدليات المناوبة في حلب
-        </div>
+        <div class="container">
 
-        <div>
-            يتم تحديث البيانات بشكل دوري
+            <strong>
+                دليل الصيدليات المناوبة في حلب
+            </strong>
+
+            <p>
+                يتم تحديث البيانات بشكل دوري.
+            </p>
+
         </div>
 
     </footer>
 
 
-    <script src="script.js"></script>
+    <!-- JavaScript -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>
