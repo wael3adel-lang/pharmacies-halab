@@ -1,419 +1,573 @@
 /* =========================================
-   VARIABLES
+   PHARMACIES - HALAB
+   Main Application
 ========================================= */
 
-const areasList = document.getElementById("areasList");
+document.addEventListener("DOMContentLoaded", () => {
 
-const pharmaciesGrid =
-    document.getElementById("pharmaciesGrid");
+    /* =========================================
+       ELEMENTS
+    ========================================= */
 
-const pharmacySearch =
-    document.getElementById("pharmacySearch");
+    const neighborhoodToggle =
+        document.getElementById("neighborhoodToggle");
 
-const areaSearch =
-    document.getElementById("areaSearch");
+    const neighborhoodDropdown =
+        document.getElementById("neighborhoodDropdown");
 
-const clearSearch =
-    document.getElementById("clearSearch");
+    const selectedNeighborhood =
+        document.getElementById("selectedNeighborhood");
 
-const pharmacyCount =
-    document.getElementById("pharmacyCount");
+    const neighborhoodList =
+        document.getElementById("neighborhoodList");
 
-const emptyState =
-    document.getElementById("emptyState");
+    const neighborhoodSearch =
+        document.getElementById("neighborhoodSearch");
 
-const resultsDescription =
-    document.getElementById("resultsDescription");
+    const pharmacySearch =
+        document.getElementById("pharmacySearch");
 
+    const clearSearch =
+        document.getElementById("clearSearch");
 
-let selectedArea = "all";
+    const pharmacyList =
+        document.getElementById("pharmacyList");
 
-let selectedDuty = "all";
+    const totalPharmacies =
+        document.getElementById("totalPharmacies");
 
-let searchText = "";
+    const nightPharmacies =
+        document.getElementById("nightPharmacies");
 
+    const allDayPharmacies =
+        document.getElementById("allDayPharmacies");
 
-/* =========================================
-   AREAS
-========================================= */
+    const resultsCount =
+        document.getElementById("resultsCount");
 
-const areas = [
-    "الجميلية",
-    "الشعار",
-    "الميدان",
-    "السليمانية",
-    "الشيخ طه",
-    "العمري",
-    "الفردوس",
-    "الهلك",
-    "العباسية",
-    "الجيزرية",
-    "سليمان الحلبي",
-    "الميريديان",
-    "حلب الجديدة",
-    "الفرقان",
-    "السكري",
-    "صلاح الدين",
-    "المشارقة",
-    "الصاخور",
-    "الحمدانية",
-    "الراموسة",
-    "الأنصاري",
-    "الزبدية",
-    "الكلاسة",
-    "بستان القصر",
-    "الإذاعة",
-    "الزهراء",
-    "جمعية الزهراء",
-    "الموكامبو",
-    "شارع النيل",
-    "الأعظمية"
-];
+    const noResults =
+        document.getElementById("noResults");
 
 
-/* =========================================
-   RENDER AREAS
-========================================= */
+    /* =========================================
+       DATA CHECK
+    ========================================= */
 
-function renderAreas(search = "") {
+    if (
+        typeof pharmacies === "undefined" ||
+        !Array.isArray(pharmacies)
+    ) {
 
-    areasList.innerHTML = "";
-
-    const filteredAreas = areas.filter(area =>
-        area.includes(search)
-    );
-
-    const allButton = document.createElement("button");
-
-    allButton.className =
-        "area-button " +
-        (selectedArea === "all" ? "active" : "");
-
-    allButton.textContent = "جميع الأحياء";
-
-    allButton.addEventListener("click", () => {
-
-        selectedArea = "all";
-
-        renderAreas(areaSearch.value);
-
-        renderPharmacies();
-
-    });
-
-    areasList.appendChild(allButton);
-
-
-    filteredAreas.forEach(area => {
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "area-button " +
-            (selectedArea === area ? "active" : "");
-
-        button.textContent = area;
-
-        button.addEventListener("click", () => {
-
-            selectedArea = area;
-
-            renderAreas(areaSearch.value);
-
-            renderPharmacies();
-
-        });
-
-        areasList.appendChild(button);
-
-    });
-
-}
-
-
-/* =========================================
-   FILTER PHARMACIES
-========================================= */
-
-function getFilteredPharmacies() {
-
-    return pharmacies.filter(pharmacy => {
-
-        const matchesArea =
-            selectedArea === "all" ||
-            pharmacy.area === selectedArea;
-
-
-        const matchesDuty =
-            selectedDuty === "all" ||
-            pharmacy.duty === selectedDuty;
-
-
-        const text =
-            `${pharmacy.name}
-            ${pharmacy.area}
-            ${pharmacy.address}`.toLowerCase();
-
-
-        const matchesSearch =
-            text.includes(searchText.toLowerCase());
-
-
-        return (
-            matchesArea &&
-            matchesDuty &&
-            matchesSearch
+        console.error(
+            "لم يتم العثور على بيانات الصيدليات في data.js"
         );
 
-    });
-
-}
-
-
-/* =========================================
-   RENDER PHARMACIES
-========================================= */
-
-function renderPharmacies() {
-
-    const filtered =
-        getFilteredPharmacies();
-
-    pharmaciesGrid.innerHTML = "";
-
-    pharmacyCount.textContent =
-        filtered.length;
-
-
-    if (selectedArea === "all") {
-
-        resultsDescription.textContent =
-            "الصيدليات المناوبة حالياً";
-
-    } else {
-
-        resultsDescription.textContent =
-            `الصيدليات المناوبة في حي ${selectedArea}`;
-
-    }
-
-
-    if (filtered.length === 0) {
-
-        emptyState.hidden = false;
+        if (resultsCount) {
+            resultsCount.textContent =
+                "تعذر تحميل بيانات الصيدليات";
+        }
 
         return;
-
     }
 
 
-    emptyState.hidden = true;
+    /* =========================================
+       STATE
+    ========================================= */
+
+    let selectedArea = "all";
+
+    let searchText = "";
+
+    let areaSearchText = "";
 
 
-    filtered.forEach(pharmacy => {
+    /* =========================================
+       GET AREAS FROM DATA
+    ========================================= */
 
-        const card =
-            document.createElement("article");
-
-        card.className =
-            "pharmacy-card";
-
-
-        const dutyText =
-            pharmacy.duty === "24"
-                ? "24 ساعة"
-                : "حتى 1:30 ليلاً";
+    const areas = [
+        ...new Set(
+            pharmacies
+                .map(pharmacy => pharmacy.area)
+                .filter(Boolean)
+        )
+    ];
 
 
-        const dutyClass =
-            pharmacy.duty === "24"
-                ? "status-24"
-                : "status-0130";
+    /* =========================================
+       OPEN / CLOSE NEIGHBORHOODS
+    ========================================= */
 
+    neighborhoodToggle.addEventListener(
+        "click",
+        () => {
 
-        let mapLink = "#";
+            const isOpen =
+                neighborhoodDropdown.classList.contains("open");
 
+            if (isOpen) {
 
-        if (
-            pharmacy.lat &&
-            pharmacy.lng
-        ) {
+                neighborhoodDropdown.classList.remove("open");
 
-            mapLink =
-                `https://www.google.com/maps/search/?api=1&query=${pharmacy.lat},${pharmacy.lng}`;
+            } else {
+
+                neighborhoodDropdown.classList.add("open");
+
+                neighborhoodSearch.focus();
+
+            }
 
         }
+    );
 
 
-        let phoneButton = "";
+    /* =========================================
+       CLOSE WHEN CLICKING OUTSIDE
+    ========================================= */
 
+    document.addEventListener(
+        "click",
+        event => {
 
-        if (pharmacy.phone) {
+            const selector =
+                document.getElementById(
+                    "neighborhoodSelector"
+                );
 
-            phoneButton = `
-                <a
-                    class="action-button phone-button"
-                    href="tel:${pharmacy.phone}"
-                >
-                    اتصال
-                </a>
-            `;
+            if (
+                selector &&
+                !selector.contains(event.target)
+            ) {
+
+                neighborhoodDropdown.classList.remove(
+                    "open"
+                );
+
+            }
 
         }
+    );
 
 
-        card.innerHTML = `
+    /* =========================================
+       RENDER NEIGHBORHOODS
+    ========================================= */
 
-            <div class="pharmacy-top">
+    function renderNeighborhoods() {
 
-                <div>
-
-                    <h3 class="pharmacy-name">
-                        ${pharmacy.name}
-                    </h3>
-
-                    <div class="area-name">
-                        ${pharmacy.area}
-                    </div>
-
-                </div>
-
-                <span class="status ${dutyClass}">
-                    ${dutyText}
-                </span>
-
-            </div>
+        neighborhoodList.innerHTML = "";
 
 
-            <div class="pharmacy-address">
-                ${pharmacy.address}
-            </div>
+        /* جميع الأحياء */
+
+        const allButton =
+            document.createElement("button");
+
+        allButton.type = "button";
+
+        allButton.className =
+            "neighborhood-option " +
+            (selectedArea === "all"
+                ? "active"
+                : "");
+
+        allButton.textContent =
+            "جميع الأحياء";
 
 
-            <div class="pharmacy-actions">
-
-                <a
-                    class="action-button location-button"
-                    href="${mapLink}"
-                    target="_blank"
-                >
-                    الموقع على الخريطة
-                </a>
-
-                ${phoneButton}
-
-            </div>
-
-        `;
-
-
-        pharmaciesGrid.appendChild(card);
-
-    });
-
-}
-
-
-/* =========================================
-   PHARMACY SEARCH
-========================================= */
-
-pharmacySearch.addEventListener(
-    "input",
-    event => {
-
-        searchText =
-            event.target.value.trim();
-
-        renderPharmacies();
-
-    }
-);
-
-
-/* =========================================
-   AREA SEARCH
-========================================= */
-
-areaSearch.addEventListener(
-    "input",
-    event => {
-
-        renderAreas(
-            event.target.value.trim()
-        );
-
-    }
-);
-
-
-/* =========================================
-   CLEAR SEARCH
-========================================= */
-
-clearSearch.addEventListener(
-    "click",
-    () => {
-
-        pharmacySearch.value = "";
-
-        searchText = "";
-
-        renderPharmacies();
-
-        pharmacySearch.focus();
-
-    }
-);
-
-
-/* =========================================
-   DUTY FILTER
-========================================= */
-
-document
-    .querySelectorAll(".filter-button")
-    .forEach(button => {
-
-        button.addEventListener(
+        allButton.addEventListener(
             "click",
             () => {
 
-                document
-                    .querySelectorAll(
-                        ".filter-button"
-                    )
-                    .forEach(item => {
+                selectedArea = "all";
 
-                        item.classList.remove(
-                            "active"
-                        );
+                selectedNeighborhood.textContent =
+                    "جميع الأحياء";
 
-                    });
-
-
-                button.classList.add(
-                    "active"
+                neighborhoodDropdown.classList.remove(
+                    "open"
                 );
 
-
-                selectedDuty =
-                    button.dataset.duty;
-
+                renderNeighborhoods();
 
                 renderPharmacies();
 
             }
         );
 
-    });
+
+        neighborhoodList.appendChild(
+            allButton
+        );
 
 
-/* =========================================
-   INITIALIZE
-========================================= */
+        /* تصفية الأحياء */
 
-renderAreas();
+        const filteredAreas =
+            areas.filter(area =>
+                area.includes(areaSearchText)
+            );
 
-renderPharmacies();
+
+        filteredAreas.forEach(area => {
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "neighborhood-option " +
+                (selectedArea === area
+                    ? "active"
+                    : "");
+
+            button.textContent = area;
+
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    selectedArea = area;
+
+                    selectedNeighborhood.textContent =
+                        area;
+
+                    neighborhoodDropdown.classList.remove(
+                        "open"
+                    );
+
+                    renderNeighborhoods();
+
+                    renderPharmacies();
+
+                }
+            );
+
+
+            neighborhoodList.appendChild(
+                button
+            );
+
+        });
+
+
+        /* لا توجد أحياء */
+
+        if (
+            filteredAreas.length === 0
+        ) {
+
+            const empty =
+                document.createElement("div");
+
+            empty.className =
+                "neighborhood-empty";
+
+            empty.textContent =
+                "لا يوجد حي بهذا الاسم";
+
+            neighborhoodList.appendChild(
+                empty
+            );
+
+        }
+
+    }
+
+
+    /* =========================================
+       FILTER PHARMACIES
+    ========================================= */
+
+    function getFilteredPharmacies() {
+
+        return pharmacies.filter(
+            pharmacy => {
+
+                const matchesArea =
+                    selectedArea === "all" ||
+                    pharmacy.area === selectedArea;
+
+
+                const text =
+                    `${pharmacy.name || ""}
+                     ${pharmacy.area || ""}
+                     ${pharmacy.address || ""}`
+                        .toLowerCase();
+
+
+                const matchesSearch =
+                    text.includes(
+                        searchText.toLowerCase()
+                    );
+
+
+                return (
+                    matchesArea &&
+                    matchesSearch
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       RENDER PHARMACIES
+    ========================================= */
+
+    function renderPharmacies() {
+
+        const filtered =
+            getFilteredPharmacies();
+
+
+        pharmacyList.innerHTML = "";
+
+
+        /* الإحصائيات */
+
+        totalPharmacies.textContent =
+            filtered.length;
+
+
+        const nightCount =
+            filtered.filter(
+                pharmacy =>
+                    pharmacy.duty !== "24"
+            ).length;
+
+
+        const allDayCount =
+            filtered.filter(
+                pharmacy =>
+                    pharmacy.duty === "24"
+            ).length;
+
+
+        nightPharmacies.textContent =
+            nightCount;
+
+
+        allDayPharmacies.textContent =
+            allDayCount;
+
+
+        /* وصف النتائج */
+
+        if (
+            selectedArea === "all"
+        ) {
+
+            resultsCount.textContent =
+                "الصيدليات المناوبة حالياً";
+
+        } else {
+
+            resultsCount.textContent =
+                `الصيدليات المناوبة في حي ${selectedArea}`;
+
+        }
+
+
+        /* لا توجد نتائج */
+
+        if (
+            filtered.length === 0
+        ) {
+
+            noResults.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        noResults.style.display =
+            "none";
+
+
+        /* عرض الصيدليات */
+
+        filtered.forEach(
+            pharmacy => {
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+
+                card.className =
+                    "pharmacy-card";
+
+
+                /* وقت المناوبة */
+
+                const dutyText =
+                    pharmacy.duty === "24"
+                        ? "24 ساعة"
+                        : "حتى 1:30 ليلاً";
+
+
+                /* الخريطة */
+
+                let mapLink = "#";
+
+
+                if (
+                    pharmacy.lat &&
+                    pharmacy.lng
+                ) {
+
+                    mapLink =
+                        `https://www.google.com/maps/search/?api=1&query=${pharmacy.lat},${pharmacy.lng}`;
+
+                }
+
+
+                /* الهاتف */
+
+                let phoneButton = "";
+
+
+                if (
+                    pharmacy.phone
+                ) {
+
+                    phoneButton = `
+                        <a
+                            class="action-button phone-button"
+                            href="tel:${pharmacy.phone}"
+                        >
+                            اتصال
+                        </a>
+                    `;
+
+                }
+
+
+                card.innerHTML = `
+
+                    <div class="pharmacy-top">
+
+                        <div>
+
+                            <h3 class="pharmacy-name">
+                                ${pharmacy.name || ""}
+                            </h3>
+
+                            <div class="area-name">
+                                ${pharmacy.area || ""}
+                            </div>
+
+                        </div>
+
+                        <span class="status">
+                            ${dutyText}
+                        </span>
+
+                    </div>
+
+
+                    <div class="pharmacy-address">
+                        ${pharmacy.address || ""}
+                    </div>
+
+
+                    <div class="pharmacy-actions">
+
+                        <a
+                            class="action-button location-button"
+                            href="${mapLink}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            الموقع على الخريطة
+                        </a>
+
+                        ${phoneButton}
+
+                    </div>
+
+                `;
+
+
+                pharmacyList.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =========================================
+       NEIGHBORHOOD SEARCH
+    ========================================= */
+
+    neighborhoodSearch.addEventListener(
+        "input",
+        event => {
+
+            areaSearchText =
+                event.target.value.trim();
+
+            renderNeighborhoods();
+
+        }
+    );
+
+
+    /* =========================================
+       PHARMACY SEARCH
+    ========================================= */
+
+    pharmacySearch.addEventListener(
+        "input",
+        event => {
+
+            searchText =
+                event.target.value.trim();
+
+            renderPharmacies();
+
+        }
+    );
+
+
+    /* =========================================
+       CLEAR SEARCH
+    ========================================= */
+
+    clearSearch.addEventListener(
+        "click",
+        () => {
+
+            pharmacySearch.value = "";
+
+            searchText = "";
+
+            renderPharmacies();
+
+            pharmacySearch.focus();
+
+        }
+    );
+
+
+    /* =========================================
+       INITIALIZE
+    ========================================= */
+
+    renderNeighborhoods();
+
+    renderPharmacies();
+
+});
